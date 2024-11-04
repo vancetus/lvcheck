@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lebensversicherungs-Leadformular</title>
+    <style>
+        /* Styles für eine ästhetische Darstellung */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .form-container { background-color: #ffffff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px; }
+        .form-container h2 { text-align: center; color: #333; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; color: #333; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; }
+        .form-group button { background-color: #4CAF50; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; width: 100%; }
+        .form-group button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Lebensversicherungs-Check</h2>
+	<form action="https://formspree.io/f/xpwzpwwp" method="POST">
+    <!-- Deine Formularfelder hier -->
+    <button type="submit">Absenden</button>
+</form>
+<form action="https://formspree.io/f/xpwzpwwp" method="POST">
+    <label>
+        Dein Name:
+        <input type="text" name="name" required>
+    </label>
+    <label>
+        Deine E-Mail-Adresse:
+        <input type="email" name="email" required>
+    </label>
+    <label>
+        Telefonnummer:
+        <input type="text" name="phone">
+    </label>
+    <label>
+        Welche Versicherung ist betroffen?
+        <input type="text" name="insurance_affected">
+    </label>
+    <label>
+        Versicherungsgesellschaft:
+        <input type="text" name="company">
+    </label>
+    <label>
+        Versicherungsart:
+        <input type="text" name="insurance_type">
+    </label>
+    <label>
+        Monatliche Prämie:
+        <input type="text" name="monthly_premium">
+    </label>
+    <label>
+        Zusätzliche Informationen:
+        <textarea name="additional_info"></textarea>
+    </label>
+    <button type="submit">Anfrage senden</button>
+</form>
+
+
+    <form action="submit.php" method="POST">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefonnummer</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label>Betroffen von einer Lebensversicherung?</label>
+            <input type="radio" id="yes" name="insurance_affected" value="Ja" required>
+            <label for="yes">Ja</label>
+            <input type="radio" id="no" name="insurance_affected" value="Nein">
+            <label for="no">Nein</label>
+        </div>
+        <div class="form-group" id="company-group" style="display: none;">
+            <label for="company">Versicherungsgesellschaft</label>
+            <input type="text" id="company" name="company">
+        </div>
+        <div class="form-group" id="insurance-type-group" style="display: none;">
+            <label for="insurance-type">Art der Lebensversicherung</label>
+            <select id="insurance-type" name="insurance_type">
+                <option value="">Bitte wählen...</option>
+                <option value="Kapitallebensversicherung">Kapitallebensversicherung</option>
+                <option value="Risikolebensversicherung">Risikolebensversicherung</option>
+                <option value="Fondsgebundene Lebensversicherung">Fondsgebundene Lebensversicherung</option>
+                <option value="Andere">Andere</option>
+            </select>
+        </div>
+        <div class="form-group" id="monthly-premium-group" style="display: none;">
+            <label for="monthly-premium">Monatliche Prämie</label>
+            <input type="number" id="monthly-premium" name="monthly_premium">
+        </div>
+        <div class="form-group">
+            <button type="submit">Absenden</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const insuranceAffectedRadios = document.getElementsByName('insurance_affected');
+    const companyGroup = document.getElementById('company-group');
+    const insuranceTypeGroup = document.getElementById('insurance-type-group');
+    const monthlyPremiumGroup = document.getElementById('monthly-premium-group');
+
+    insuranceAffectedRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.value === 'Ja') {
+                companyGroup.style.display = 'block';
+                insuranceTypeGroup.style.display = 'block';
+                monthlyPremiumGroup.style.display = 'block';
+            } else {
+                companyGroup.style.display = 'none';
+                insuranceTypeGroup.style.display = 'none';
+                monthlyPremiumGroup.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
